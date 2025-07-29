@@ -7,7 +7,6 @@ async function getAccessToken() {
   const response = await fetch('https://test.api.amadeus.com/v1/security/oauth2/token', {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    // Set the required body parameters using your client credentials
     body: new URLSearchParams({
       grant_type: 'client_credentials',
       client_id: clientId,
@@ -59,19 +58,19 @@ document.getElementById('flightForm').addEventListener('submit', async function 
   const origin = document.getElementById('origin').value.toUpperCase();
   const destination = document.getElementById('destination').value.toUpperCase();
   const departureDate = document.getElementById('departureDate').value;
-  const resultsDiv = document.getElementById('results');  // Element to show results
+  const resultsDiv = document.getElementById('results');  
 
   // Show loading message while waiting for API response
   resultsDiv.innerHTML = '<p>Loading flights...</p>';
 
   try {
-    // Step 1: Get access token
+    //Get access token
     const token = await getAccessToken();
 
-    // Step 2: Use token to search for flight offers
+    //search for flight offers
     const data = await searchFlightOffers(token, origin, destination, departureDate);
 
-    // Check if any flights were found
+    // Check if flights were found
     if (!data.data || data.data.length === 0) {
       resultsDiv.innerHTML = '<p>No flights found.</p>';
       return;
@@ -82,9 +81,9 @@ document.getElementById('flightForm').addEventListener('submit', async function 
 
     // Loop through each flight offer and display it
     data.data.forEach(offer => {
-      const price = offer.price?.total || 'N/A';  // Total price
-      const currency = offer.price?.currency || 'USD';  // Currency
-      const segments = offer.itineraries[0]?.segments || [];  // Flight segments
+      const price = offer.price?.total || 'N/A'; 
+      const currency = offer.price?.currency || 'USD';  
+      const segments = offer.itineraries[0]?.segments || []; 
 
       //HTML details for each flight
       const details = segments.map(seg => `
@@ -101,7 +100,7 @@ document.getElementById('flightForm').addEventListener('submit', async function 
     });
 
   } catch (err) {
-    // Handle errors (e.g., network issues, invalid credentials)
+    // Handle errors
     console.error(err);
     resultsDiv.innerHTML = '<p>Error loading flight data.</p>';
   }
