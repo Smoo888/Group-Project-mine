@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Product – Globenest</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Styles -->
+   <link rel="stylesheet" href="customerss.css">
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="css/productstyle.css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
+</head>
+
+<body>
+  <!-- Shared Navbar -->
+  <div id="navbar"></div>
+
+<main class="container">
+<div class="container">
+  <h3 class="center-align" style="margin-top: 40px;">Flight Search</h3>
+
+  <div class="row">
+    <div class="col s12 m8 offset-m2 l6 offset-l3">
+      <div class="card" style="padding: 20px; margin-top: 20px;">
+        <form id="flightForm" class="row">
+          <div class="input-field col s12">
+            <input type="text" id="origin" required maxlength="3" class="validate" />
+            <label for="origin">Origin Airport Code (e.g. JFK)</label>
+          </div>
+
+          <div class="input-field col s12">
+            <input type="text" id="destination" required maxlength="3" class="validate" />
+            <label for="destination">Destination Airport Code (e.g. LHR)</label>
+          </div>
+
+          <div class="input-field col s12">
+            <input type="date" id="departureDate" required class="validate" />
+            <label for="departureDate">Departure Date</label>
+          </div>
+
+          <div class="col s12 center-align" style="margin-top: 20px;">
+            <button type="submit" class="btn blue darken-2 waves-effect waves-light">
+              Search Flights
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="results" class="section" style="margin-top: 30px;"></div>
+</div>
+
+<!-- Shared Footer -->
+  <div id="footer"></div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Init slider
+      const sliders = document.querySelectorAll('.slider');
+      M.Slider.init(sliders, { height: 480 });
+
+      // Load navbar
+      fetch('navbar.html')
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById('navbar').innerHTML = html;
+
+    // Re-initialize Materialize components *after* navbar is injected
+    M.Sidenav.init(document.querySelectorAll('.sidenav'));
+
+    const dropdowns = document.querySelectorAll('.dropdown-trigger');
+    M.Dropdown.init(dropdowns, {
+      coverTrigger: false,
+      constrainWidth: false
+    });
+
+    const collapsibles = document.querySelectorAll('.collapsible');
+    M.Collapsible.init(collapsibles);
+  });
+
+
+      // Load footer
+      fetch('footer.html')
+        .then(res => res.text())
+        .then(html => {
+          document.getElementById('footer').innerHTML = html;
+        });
+    });
+  </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="customers.js"></script>
+    <script src="./js/dest.js"></script>
+    <script src="banner.js"></script>
+</body>
+</html>
